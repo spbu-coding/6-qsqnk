@@ -56,7 +56,7 @@ sort_func_t get_sort_func(const char* sort_name) {
     }
 }
 
-int get_count_of_strings(char* argument) {
+long int get_count_of_strings(char* argument) {
     array_size_t count = strtol(argument, NULL, 10);
     if ((long int) count < 0) {
         error("Count of strings must be non-negative\n");
@@ -146,10 +146,11 @@ int main(int argc, char* argv[]) {
         error("Count of parameters must be equal to 5\n");
         return -1;
     }
-    array_size_t count_of_strings = get_count_of_strings(argv[COUNT_OF_STRINGS_INDEX]);
-    if (count_of_strings == -1) {
+    long int count_of_strings_us = get_count_of_strings(argv[COUNT_OF_STRINGS_INDEX]);
+    if (count_of_strings_us == -1) {
         return -1;
     }
+    size_t count_of_strings = count_of_strings_us;
     sort_func_t sort = get_sort_func(argv[SORT_NAME_INDEX]);
     if (sort == NULL) {
         return -1;
