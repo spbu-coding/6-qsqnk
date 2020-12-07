@@ -80,6 +80,7 @@ strings_array_t create_strings_array(array_size_t count_of_strings) {
     strings_array_t  strings_array = (char**)malloc(sizeof(char*) * count_of_strings);
     if (strings_array == NULL) {
         error("Can not allocate memory for strings array\n");
+        free(strings_array);
         return NULL;
     }
     for (size_t i = 0; i < count_of_strings; i++) {
@@ -161,6 +162,7 @@ int main(int argc, char* argv[]) {
     }
     strings_array_t strings_array = create_strings_array(count_of_strings);
     if (strings_array == NULL) {
+        free_strings_array(strings_array, count_of_strings);
         return -1;
     }
     FILE* input_file = fopen(argv[INPUT_FILENAME_INDEX], "r");

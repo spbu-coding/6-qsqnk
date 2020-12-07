@@ -75,6 +75,7 @@ void recursive_merge(strings_array_t strings_array, strings_array_t  buffer,
 void merge(strings_array_t strings_array, array_size_t count_of_strings, comparator_func_t comparator) {
     strings_array_t buffer = (strings_array_t)malloc(count_of_strings * sizeof(char*));
     recursive_merge(strings_array, buffer, 0, count_of_strings, comparator);
+    free(buffer);
 }
 
 /************************** Quick sort functions **************************/
