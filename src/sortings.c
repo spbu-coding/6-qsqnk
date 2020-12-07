@@ -102,8 +102,6 @@ void quick(strings_array_t strings_array, array_size_t count_of_strings, compara
 
 /************* Radix sort functions *************/
 
-
-
 void radix(strings_array_t strings_array, array_size_t count_of_strings, comparator_func_t comparator) {
     int order = (comparator("a", "b") < 0);
     unsigned int length = 0;
