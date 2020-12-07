@@ -94,23 +94,28 @@ strings_array_t create_strings_array(array_size_t count_of_strings) {
     return strings_array;
 }
 
-int read_file(FILE* input_file, strings_array_t strings_array, array_size_t count_of_strings) {
+int read_file(strings_array_t strings_array, array_size_t count_of_strings, char* input_filename) {
+    FILE* input_file = fopen(input_filename, "r");
     if (input_file == NULL) {
-        error("Can not read input file\n");
+        error("Can not read input file");
+        fclose(input_file);
         return -1;
     }
     size_t index = 0;
     while (!feof(input_file) && index < count_of_strings) {
         if (fgets(strings_array[index], MAX_INPUT_STRING_SIZE, input_file) == NULL) {
             error("Can not read %ld string\n", index);
+            fclose(input_file);
             return -1;
         }
         index++;
     }
     if (feof(input_file) && index != count_of_strings) {
         error("Count of strings in file must be equal to first console parameter\n");
+        fclose(input_file);
         return -1;
     }
+    fclose(input_file);
     return 0;
 }
 
@@ -165,9 +170,7 @@ int main(int argc, char* argv[]) {
         free_strings_array(strings_array, count_of_strings);
         return -1;
     }
-    FILE* input_file = fopen(argv[INPUT_FILENAME_INDEX], "r");
-    if (read_file(input_file, strings_array, count_of_strings)) {
-        fclose(input_file);
+    if (read_file(strings_array, count_of_strings, argv[INPUT_FILENAME_INDEX])) {
         free_strings_array(strings_array, count_of_strings);
         return -1;
     }
@@ -179,6 +182,5 @@ int main(int argc, char* argv[]) {
         return -1;
     }
     free_strings_array(strings_array, count_of_strings);
-    fclose(input_file);
     fclose(output_file);
 }
