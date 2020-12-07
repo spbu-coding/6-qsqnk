@@ -101,7 +101,7 @@ int read_file(FILE* input_file, strings_array_t strings_array, array_size_t coun
     size_t index = 0;
     while (!feof(input_file) && index < count_of_strings) {
         if (fgets(strings_array[index], MAX_INPUT_STRING_SIZE, input_file) == NULL) {
-            error("Can not read %d string\n", index);
+            error("Can not read %ld string\n", index);
             return -1;
         }
         index++;
