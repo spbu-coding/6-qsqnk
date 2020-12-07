@@ -109,7 +109,8 @@ void radix(strings_array_t strings_array, array_size_t count_of_strings, compara
     long int max_length = 0;
     long int temp = 0;
     long int count_less = 0;
-    for (long int i = 0; i < count_of_strings; i++) {
+    long int unsigned_count_of_strings = count_of_strings;
+    for (long int i = 0; i < unsigned_count_of_strings; i++) {
         length = strlen(strings_array[i]);
         if (max_length < length)
             max_length = length;
@@ -124,7 +125,7 @@ void radix(strings_array_t strings_array, array_size_t count_of_strings, compara
             counting_array[i] = 0;
         }
         //counting chars starting from the end of strings
-        for (long int line = 0; line < count_of_strings; line++) {
+        for (long int line = 0; line < unsigned_count_of_strings; line++) {
             counting_array[(unsigned char)(strings_array[line][column])]++;
         }
         count_less = 0;
@@ -135,17 +136,17 @@ void radix(strings_array_t strings_array, array_size_t count_of_strings, compara
             counting_array[i] = count_less;
             count_less += temp;
         }
-        for (long int line = 0; line < count_of_strings; line++) {
+        for (long int line = 0; line < unsigned_count_of_strings; line++) {
             buffer[counting_array[(unsigned char)strings_array[line][column]]] = strings_array[line];
             counting_array[(unsigned char)strings_array[line][column]]++;
         }
         if (order > 0) {
-            for (long int line = 0; line < count_of_strings; line++) {
+            for (long int line = 0; line < unsigned_count_of_strings; line++) {
                 strings_array[line] = buffer[line];
             }
         } else {
-            for (long int line = 0; line < count_of_strings; line++) {
-                strings_array[line] = buffer[count_of_strings - line - 1];
+            for (long int line = 0; line < unsigned_count_of_strings; line++) {
+                strings_array[line] = buffer[unsigned_count_of_strings - line - 1];
             }
         }
     }
