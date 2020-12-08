@@ -184,3 +184,4 @@ int main(int argc, char* argv[]) {
     free_strings_array(strings_array, count_of_strings);
     fclose(output_file);
 }
+
