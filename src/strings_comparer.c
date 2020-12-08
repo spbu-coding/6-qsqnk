@@ -98,7 +98,6 @@ int read_file(strings_array_t strings_array, array_size_t count_of_strings, char
     FILE* input_file = fopen(input_filename, "r");
     if (input_file == NULL) {
         error("Can not read input file");
-        fclose(input_file);
         return -1;
     }
     size_t index = 0;
